@@ -1,0 +1,134 @@
+body {
+  font-family: Arial, Verdana, sans-serif;
+  font-size: 100%;
+  margin: 0px;
+  color: #666;
+  background-color: #f8f8f8;}
+.wrapper {
+  max-width: 800px;
+  text-align: center;
+  margin: 0 auto;
+  background-color: #eee;
+  position: relative;
+  overflow: hidden;
+}
+h1 {
+  color: #fff;
+  background-color: #507DA7;
+  margin-top: 0px;
+}
+#pin-left {
+  position: absolute;
+  top: -27px;
+  left: 20px;
+  transform: rotate(45deg);
+}
+#pin-right-bottom {
+  position: absolute;
+  right: 10px;
+  bottom: 5px;
+}
+#datetime {
+  color: #507da7;
+}
+#menuToggle {
+  position: absolute;
+  top: 0.5em;
+  right: 0.5em;
+  color: #CBD2D8;
+  z-index: 1000;
+}
+#menuToggle.active {
+  right: 5em;
+}
+#menu {
+  position: absolute;
+  top: 0em;
+  right: -5em;
+  bottom: 0;
+  width: 5em;
+  background-color: #234769;
+  opacity: 0.75;
+  padding-top: 0.3em;
+  text-align: center;
+  z-index: 1100;
+}
+#menu.active {
+  right: 0em;
+}
+#menu,
+#menuToggle {
+  -webkit-transition: all 0.2s ease-out;
+  -moz-transition: all 0.2s ease-out;
+  -ms-transition: all 0.2s ease-out;
+  -o-transition: all 0.2s ease-out;
+  transition: all 0.2s ease-out;
+}
+ul {
+  margin: 0px;
+  padding: 0px;
+  list-style-type: none;
+}
+li {
+  margin-bottom: 20px;
+}
+li>a {
+  padding: 1.5em 0.2em;
+  margin: 1.5em 0em;
+  color: #f8f8f8;
+  text-decoration: none;
+}
+table {
+  margin: auto;
+  border-spacing: 0px;}
+th, td {
+  padding: 5px 30px 5px 10px;
+  border-spacing: 0px;
+  margin: 0px;
+  text-align: left;
+  border-top: 1px solid #f1f8fe;
+  background-color: #e0e9f0;
+  border-bottom: 1px solid #cbd2d8;
+  border-right: 1px solid #cbd2d8;}
+tr.head th {
+  color: #fff;
+  background-color: #90b4d6;
+  border-bottom: 2px solid #547ca0;
+  border-right: 1px solid #749abe;
+  text-align: center;
+  text-shadow: -1px -1px 1px #666666;
+  letter-spacing: 0.15em;}
+td {
+  text-shadow: 1px 1px 1px #ffffff;}
+tr.even td, tr.even th {
+  background-color: #e8eff5;}
+tr.head th:first-child {
+  -webkit-border-top-left-radius: 5px;
+  -moz-border-radius-topleft: 5px;
+  border-top-left-radius: 5px;}
+tr.head th:last-child{
+  -webkit-border-top-right-radius: 5px;
+  -moz-border-radius-topright: 5px;
+  border-top-right-radius: 5px;}
+td.output {
+  text-align: right;
+}
+i.in-error {
+  color: #d9534f
+}
+i.in-normal {
+  color: #5cb85c;
+}
+i.in-none {
+  color: #dfdfdf;
+}
+div.info {
+  margin-top: 5px;
+  text-align: center;}
+textarea {
+  width: 95%;
+  height: 5em;}
+footer {
+  font-size: 80%;
+  padding: 5px 3px 5px 3px;
+  text-align: center;}

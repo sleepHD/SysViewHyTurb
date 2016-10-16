@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="ch">
+	<head>
+		<meta charset="utf-8">
+		<title>SysViewCp Main View </title>
+		<link rel="stylesheet" href="css/font-awesome.min.css" />
+		<link rel="stylesheet" href="css/style.css" />
+	</head>
+	<body oncontextmenu="return false">
+		<div id="app" class="wrapper">
+			<header>
+				<h1><i class="fa fa-eye-slash in-error"></i> 管道式水轮机组运行参数</h1>
+				<div id="pin-left">
+					<image src="images/logo.png"></image>
+				</div>
+
+			</header>
+			<a href="" id="menuToggle"><i class="fa fa-bars fa-lg"></i></a>
+			<div id="menu" class="pure-menu">
+				<ul class="pure-menu-list">
+          <li class="pure-menu-item">
+						<a href="#" class="pure-menu-link">
+							<i class="fa fa-home fa-fw"></i>
+							&nbsp;主页
+						</a>
+					</li>
+					<li class="pure-menu-item">
+						<a href="#" class="pure-menu-link">
+							<i class="fa fa-exclamation-triangle fa-fw"></i>
+							&nbsp;报警
+						</a>
+					</li>
+          <li class="pure-menu-item">
+						<a href="#" class="pure-menu-link">
+							<i class="fa fa-line-chart fa-fw"></i>
+							&nbsp;趋势
+						</a>
+					</li>
+					<li class="pure-menu-item">
+						<a href="#" class="pure-menu-link">
+							<i class="fa fa-search fa-fw"></i>
+							&nbsp;数据
+						</a>
+					</li>
+          <li class="pure-menu-item menu-item-divided pure-menu-selected">
+            <a href="#" class="pure-menu-link">
+							<i class="fa fa-user fa-fw"></i>
+							&nbsp;登陆
+						</a>
+          </li>
+          <li class="pure-menu-item">
+						<a href="#" class="pure-menu-link">
+							<i class="fa fa-cogs fa-fw"></i>
+							&nbsp;设置
+						</a>
+					</li>
+					<li class="pure-menu-item">
+						<a id="exit" href="#" class="pure-menu-link">
+							<i class="fa fa-sign-out fa-fw"></i>
+							&nbsp;退出
+						</a>
+					</li>
+        </ul>
+      </div>
+			<table>
+				<tr class="head">
+					<th>参数</th>
+					<th>单位</th>
+					<th><i class="fa fa-eye-slash in-error"></i> 1号机</th>
+					<th><i class="fa fa-eye-slash in-error"></i> 2号机</th>
+					<th><i class="fa fa-eye in-normal"></i> 3号机</th>
+					<th><i class="fa fa-eye in-normal"></i> 4号机</th>
+					<th><i class="fa fa-eye in-none"></i> 5号机</th>
+				</tr>
+				<tr class="even">
+					<th>轴承温度</th>
+					<td class="unit">℃ </td>
+					<td class="output" name="0">{{tempA1}}</td>
+					<td class="output" name="5">{{tempA2}}</td>
+					<td class="output" name="10">{{tempA3}}</td>
+					<td class="output" name="15"></td>
+					<td class="output" name="20"></td>
+				</tr>
+				<tr class="odd">
+					<th>进水压力</th>
+					<td class="unit">Mpa</td>
+					<td class="output" name="1">{{press1}}</td>
+					<td class="output" name="6">0.04</td>
+					<td class="output" name="11">0.05</td>
+					<td class="output" name="16">0.06</td>
+					<td class="output" name="21">0.02</td>
+				</tr>
+				<tr class="even">
+					<th>转速</th>
+					<td class="unit">Krpm </td>
+					<td class="output" name="2">{{rot1}}</td>
+					<td class="output" name="7">2.34</td>
+					<td class="output" name="12">0.12</td>
+					<td class="output" name="17">0.22</td>
+					<td class="output" name="22">0.54</td>
+				</tr>
+				<tr class="odd">
+					<th>轴承振幅</th>
+					<td class="unit">mm </td>
+					<td class="output" name="3">{{phase1}}</td>
+					<td class="output" name="8">2.5</td>
+					<td class="output" name="13">10.2</td>
+					<td class="output" name="18">0.3</td>
+					<td class="output" name="23">0.4</td>
+				</tr>
+				<tr class="even">
+					<th>环境温度</th>
+					<td class="unit"> ℃ </td>
+					<td class="output" name="4">{{tempE}}</td>
+					<td class="output" name="9">8.2</td>
+					<td class="output" name="14">10.5</td>
+					<td class="output" name="19">12.6</td>
+					<td class="output" name="24">124.5</td>
+				</tr>
+			</table>
+			<div class="info">
+				<textarea readonly>提示信息</textarea>
+			</div>
+			<footer>
+				&copy; 2016 峨眉百分百节能科技有限公司
+				<div id="pin-right-bottom">
+					<span id="datetime">{{dt}}</span>
+				</div>
+			</footer>
+		</div>
+
+	<script src="javascripts/ui.js"></script>
+	<script src="javascripts/vue .js"></script>
+	<script src="javascripts/vm.js"></script>
+	<script src="javascripts/service.js"></script>
+	</body>
+</html>
