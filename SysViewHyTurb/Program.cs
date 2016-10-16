@@ -3,12 +3,35 @@
 namespace SysViewHyTurb
 {
     using System;
+    using System.IO;
+    using System.Reflection;
     using System.Windows.Forms;
     using Unosquare.Labs.EmbedIO;
     using Unosquare.Labs.EmbedIO.Log;
     using Unosquare.Labs.EmbedIO.Modules;
     static class Program
     {
+        /// <summary>
+        /// Gets the HTML root path.
+        /// </summary>
+        /// <value>
+        /// The HTML root path.
+        /// </value>
+        public static string HtmlRootPath
+        {
+            get
+            {
+                var assemblyPath = Path.GetDirectoryName(typeof(Program).GetTypeInfo().Assembly.Location);
+
+#if DEBUG
+                // This lets you edit the files without restarting the server.
+                return Path.Combine(Directory.GetParent(assemblyPath).Parent.FullName, "html");
+#else
+                // This is when you have deployed the server.
+                return Path.Combine(assemblyPath, "html");
+#endif
+            }
+        }
         /// <summary>
         /// The main entry point for the application.
         /// </summary>
@@ -34,7 +57,7 @@ namespace SysViewHyTurb
             EmbedWebServer.RegisterModule(new LocalSessionModule());
 
             // Here we setup serving of static files
-            EmbedWebServer.RegisterModule(new StaticFilesModule("./WebView"));
+            EmbedWebServer.RegisterModule(new StaticFilesModule(HtmlRootPath));
             // The static files module will cache small files in ram until it detects they have been modified.
             EmbedWebServer.Module<StaticFilesModule>().UseRamCache = true;
             EmbedWebServer.Module<StaticFilesModule>().DefaultExtension = ".html";

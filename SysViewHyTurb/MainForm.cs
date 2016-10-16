@@ -27,10 +27,10 @@ namespace SysViewHyTurb
             this.FormBorderStyle = FormBorderStyle.None;
             this.WindowState = FormWindowState.Maximized;
             this.TopMost = true;
-            //if (!WBEmulator.IsBrowserEmulationSet())
-            //{
-            //    WBEmulator.SetBrowserEmulationVersion();
-            //}
+            if (!WBEmulator.IsBrowserEmulationSet())
+            {
+                WBEmulator.SetBrowserEmulationVersion();
+            }
             this.MainwebBrowser.AllowWebBrowserDrop = false;
             //this.MainwebBrowser.IsWebBrowserContextMenuEnabled = false;
             this.MainwebBrowser.Navigate(Program.Url);
