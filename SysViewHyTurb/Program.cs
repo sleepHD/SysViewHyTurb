@@ -62,7 +62,7 @@ namespace SysViewHyTurb
             EmbedWebServer.Module<StaticFilesModule>().UseRamCache = true;
             EmbedWebServer.Module<StaticFilesModule>().DefaultExtension = ".html";
             // We don't need to add the line below. The default document is always index.html.
-            //EmbedWebServer.Module<StaticFilesModule>().DefaultDocument = "SysViewCp_main.html";
+            //EmbedWebServer.Module<StaticFilesModule>().DefaultDocument = "SysViewHyTurb_main.html";
 
             EmbedWebServer.RegisterModule(new WebSocketsModule());
             EmbedWebServer.Module<WebSocketsModule>().RegisterWebSocketsServer<WebSocketsScadaServer>("/scada");   
