@@ -1,0 +1,35 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Configuration>
+  <Driver port = "COM9" setting = "9600,8,1,0">
+    <Module id = "1">
+      <Register varID = "0"  rawMax = "20" rawMin = "4" varMax = "150" varMin = "-50" convert = "1" regID = "40033"/>
+      <Register varID = "1"  rawMax = "20" rawMin = "4" varMax = "0.2" varMin = "0" convert = "1" regID = "40035"/>
+      <Register varID = "2"  rawMax = "20" rawMin = "4" varMax = "0.15" varMin = "0" convert = "1" regID = "40037"/>  
+      <Register varID = "3"  rawMax = "20" rawMin = "4" varMax = "150" varMin = "-50" convert = "1" regID = "40039"/>
+      <Register varID = "4"  rawMax = "20" rawMin = "4" varMax = "0.2" varMin = "0" convert = "1" regID = "40041"/>
+      <Register varID = "5"  rawMax = "20" rawMin = "4" varMax = "0.15" varMin = "0" convert = "1" regID = "40043"/>
+      <Register varID = "6"  rawMax = "20" rawMin = "4" varMax = "150" varMin = "-50" convert = "1" regID = "40045"/>
+      <Register varID = "7"  rawMax = "20" rawMin = "4" varMax = "0.2" varMin = "0" convert = "1" regID = "40047"/>
+      <Register varID = "8"  rawMax = "20" rawMin = "4" varMax = "0.15" varMin = "0" convert = "1" regID = "40049"/>
+      <Register varID = "9"  rawMax = "20" rawMin = "4" varMax = "150" varMin = "-50" convert = "1" regID = "40051"/>
+    </Module>
+  </Driver>
+  <Upload dest = "121.40.96.225" path = "/38/ygpdata.asp" port="80" gduPort = "COM1" gduSetting = "115200,8,1,0" interval = "1800"> 
+    <Item code = "user" value = "000001000"/>
+    <Item code = "tmp0" varID = "9" decimal ="0"/>
+    <Item code = "tmp1" varID = "0" decimal ="0"/>
+    <Item code = "pre1" varID = "1" decimal ="2"/>
+    <Item code = "rot1" varID = "2" decimal ="2"/>
+    <Item code = "tmp2" varID = "0" decimal ="0"/>
+    <Item code = "pre2" varID = "1" decimal ="2"/>
+    <Item code = "rot2" varID = "2" decimal ="2"/>
+    <Item code = "tmp3" varID = "0" decimal ="0"/>
+    <Item code = "pre3" varID = "1" decimal ="2"/>
+    <Item code = "rot3" varID = "2" decimal ="2"/>
+  </Upload>
+  <View>
+    <Var name = "电压" rtuReg = "30001" Unit = "℃"/>
+    <Var name = "温度" rtuReg = "30003" Unit = "Kpa"/>
+    <Var name = "转速" rtuReg = "30005" Unit = "R/Min"/>
+  </View>
+</Configuration>

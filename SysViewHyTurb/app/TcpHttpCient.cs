@@ -85,34 +85,6 @@ namespace SysViewHyTurb.App
             
         }
 
-        private void Dialup(object state)
-        {
-            RasManager.Instance.OnConnectedEvent += new RasManager.NotifyEvent(OnConnectedEvent);
-            RasManager.Instance.OnDisconnectedEvent += new RasManager.NotifyEvent(OnDisconnectedEvent);
-            try
-            {
-                this.tcpClient = new TcpClient();
-                this.tcpClient.Connect(dest, port);
-                this.Message = "网络已连接";
-                this.tcpClient.Close();
-            }
-            catch (Exception)
-            {
-                this.tcpClient.Close();
-                try
-                {
-                    RasManager.Instance.DialUp("WCDMA", null, null);
-                    this.connected = true;
-                    this.Message = "拨号网络已连接";
-                }
-                catch (Exception ex1)
-                {
-                    this.Message = "网络拨号失败： " + ex1.Message;
-                }
-            }
-            
-        }
-
         private void timerEventProcessor(Object StateInfo)  
         {  
             //this.timer.Enabled = false;
@@ -158,7 +130,7 @@ namespace SysViewHyTurb.App
                     this.Message = "连接到" + this.dest + ":" + this.port.ToString() + "失败  " + e.Message;
                     try
                     {
-                        RasManager.Instance.DialUp("WCDMA", null, null);
+                        //RasManager.Instance.DialUp("WCDMA", null, null);
                     }
                     catch (Exception ex)
                     {
@@ -246,7 +218,7 @@ namespace SysViewHyTurb.App
             this.repo = repo;
             this.timer = new System.Threading.Timer(this.timerEventProcessor, 1, Timeout.Infinite, this.interval * 1000);
             this.checkTimer = new System.Threading.Timer(this.timerEventProcessor, 0, Timeout.Infinite, 60000);
-            this.delayDialup = new System.Threading.Timer(this.Dialup, 0, 3000, Timeout.Infinite);
+            //this.delayDialup = new System.Threading.Timer(this.Dialup, 0, 3000, Timeout.Infinite);
 
         }
 
@@ -254,7 +226,7 @@ namespace SysViewHyTurb.App
         {
             try
             {
-                RasManager.Instance.HangUp();
+                //RasManager.Instance.HangUp();
             }
             catch (Exception)
             {

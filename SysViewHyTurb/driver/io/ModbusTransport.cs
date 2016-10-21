@@ -13,7 +13,7 @@ namespace SysViewHyTurb.Driver.IO
     using System.IO;
     using System.Text;
     using SysViewHyTurb.Driver.Message;
-    using System.Windows.Forms;
+    //using System.Windows.Forms;
 
     /// <summary>
     /// base abstract master transport class 
