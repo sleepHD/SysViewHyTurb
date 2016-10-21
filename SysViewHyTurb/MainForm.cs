@@ -10,12 +10,38 @@ using System.Windows.Forms;
 
 namespace SysViewHyTurb
 {
+    using System.IO;
+    using System.Reflection;
     using System.Security.Permissions;
 
     [PermissionSet(SecurityAction.Demand, Name = "FullTrust")]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public partial class MainForm : Form
     {
+        private AppDriverContainer container;
+
+        /// <summary>
+        /// Gets the config file path.
+        /// </summary>
+        /// <value>
+        /// The config file path.
+        /// </value>
+        public static string ConfigFilePath
+        {
+            get
+            {
+                var assemblyPath = Path.GetDirectoryName(typeof(Program).GetTypeInfo().Assembly.Location);
+
+#if DEBUG
+                // This lets you edit the files without restarting the server.
+                return Directory.GetParent(assemblyPath).Parent.FullName + "\\SysViewCp.xml";
+#else
+                // This is when you have deployed the server.
+                return Path.Combine(assemblyPath, "html");
+#endif
+            }
+        }
+
         public MainForm()
         {
             InitializeComponent();
@@ -24,6 +50,18 @@ namespace SysViewHyTurb
 
         private void MainForm_Load(object sender, EventArgs e)
         {
+            try
+            {
+                this.container = new AppDriverContainer(ConfigFilePath);
+               
+            }
+            catch (Exception err)
+            {
+                MessageBox.Show("程序初始化失败，请检查配置文件SysView.xml格式  " + err.Message);
+                Application.Exit();
+            }
+
+
             this.FormBorderStyle = FormBorderStyle.None;
             this.WindowState = FormWindowState.Maximized;
             this.TopMost = true;
@@ -36,6 +74,7 @@ namespace SysViewHyTurb
             this.MainwebBrowser.Navigate(Program.Url);
             this.MainwebBrowser.ObjectForScripting = this;
             
+
 
         }
 

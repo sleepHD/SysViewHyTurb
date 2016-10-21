@@ -57,6 +57,29 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AppDriverContainer.cs" />
+    <Compile Include="app\TcpHttpCient.cs" />
+    <Compile Include="DataRepo.cs" />
+    <Compile Include="driver\data\DiscreteCollection.cs" />
+    <Compile Include="driver\data\IDataCollection.cs" />
+    <Compile Include="driver\data\RegisterCollection.cs" />
+    <Compile Include="driver\device\ModbusMaster.cs" />
+    <Compile Include="driver\io\IStreamResource.cs" />
+    <Compile Include="driver\io\ModbusRtuTransport.cs" />
+    <Compile Include="driver\io\ModbusSerialTransport.cs" />
+    <Compile Include="driver\io\ModbusTransport.cs" />
+    <Compile Include="driver\io\SerialPortAdapter.cs" />
+    <Compile Include="driver\io\Transport.cs" />
+    <Compile Include="driver\message\Message.cs" />
+    <Compile Include="driver\message\ModbusMessage.cs" />
+    <Compile Include="driver\message\ReadCoilsInputsRequest.cs" />
+    <Compile Include="driver\message\ReadCoilsInputsResponse.cs" />
+    <Compile Include="driver\message\ReadHoldingInputRegistersRequest.cs" />
+    <Compile Include="driver\message\ReadHoldingInputRegistersResponse.cs" />
+    <Compile Include="driver\message\SlaveExceptionResponse.cs" />
+    <Compile Include="driver\Modbus.cs" />
+    <Compile Include="driver\ModbusPoller.cs" />
+    <Compile Include="driver\utility\NetworkUtility.cs" />
     <Compile Include="MainForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -96,7 +119,9 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="eye.ico" />
+    <Content Include="SysViewCp.xml" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

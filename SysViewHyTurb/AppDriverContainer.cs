@@ -1,13 +1,13 @@
 
-namespace SysViewCp
+namespace SysViewHyTurb
 {
     using System;
     using System.Collections.Generic;
     using System.Text;
     using System.Xml;
     using System.IO.Ports;
-    using SysViewCp.App;
-    using SysViewCp.Driver;
+    using SysViewHyTurb.App;
+    using SysViewHyTurb.Driver;
     using System.Windows.Forms;
 
     class AppDriverContainer

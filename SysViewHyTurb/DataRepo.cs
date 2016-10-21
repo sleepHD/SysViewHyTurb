@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace SysViewCp
+namespace SysViewHyTurb
 {
     public class DataRepo
     {
