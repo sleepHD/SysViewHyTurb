@@ -1,53 +1,54 @@
-using System;
-using System.Collections.Generic;
-using System.Text;
-using System.IO.Ports;
-using System.Net.Sockets;
-using System.Threading;
-using System.Linq;
-using SysViewHyTurb.Driver.Utility;
-using System.Windows.Forms;
-
-namespace SysViewHyTurb.App
+namespace SysViewHyTurb.app.TcpHttpClient
 {
-    class ItemDef
-    {
-        public string Code;
-        public string Value;
-        public ushort VarID;
-        public ushort Decimal;
-    }
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Net.Sockets;
+    using System.Text;
+    using System.Threading;
+    using System.Windows.Forms.VisualStyles;
+    using System.Xml;
+    using System.Xml.Linq;
 
-    class TcpHttpCient
+    using SysViewHyTurb.app.TcpHttpUpload;
+    using SysViewHyTurb.data;
+
+    using Timer = System.Threading.Timer;
+
+
+    class HttpUploadApp
     {
         /// <summary>
-        /// private serial port
+        /// private tcp client
         /// </summary>
         private TcpClient tcpClient;
 
         /// <summary>
         /// private destination (ip or dsn)
         /// </summary>
-        private string dest;
+        private readonly string dest;
 
-        private int port;
+        /// <summary>
+        /// private destination port
+        /// </summary>
+        private readonly int port;
 
         /// <summary>
         /// private specific page
         /// </summary>
-        private string path;
+        private readonly string path;
 
-        private int interval;
+        private readonly int interval;
 
-        private List<ItemDef> itemList = new List<ItemDef>();
+        private readonly List<VarItem> itemList = new List<VarItem>();
 
-        private System.Threading.Timer timer;
+        private readonly Timer timer;
 
-        private System.Threading.Timer checkTimer;
+        private readonly Timer checkTimer;
 
-        private System.Threading.Timer delayDialup;
+        private Timer delayDialup;
 
-        private DataRepo repo;
+        private readonly DataRepo repo;
 
         private bool enabled;
 
@@ -55,11 +56,11 @@ namespace SysViewHyTurb.App
 
         private string lastSentString;
 
-        private object lockDtu = new object();
+        private readonly object lockDtu = new object();
 
-        private int readTimeOut = 5000;
+        private const int ReadTimeOut = 5000;
 
-        private int writeTimeOut = 5000;
+        private int WriteTimeOut = 5000;
 
         private bool connected;
 
@@ -74,9 +75,9 @@ namespace SysViewHyTurb.App
                 readCompleted.Set();
 
             }, 
-            tcpClient.GetStream());
+            this.tcpClient.GetStream());
 
-            bool completed = readCompleted.WaitOne(this.readTimeOut, false);
+            bool completed = readCompleted.WaitOne(ReadTimeOut, false);
             if (!completed)
             {
                 throw new TimeoutException();
@@ -85,21 +86,26 @@ namespace SysViewHyTurb.App
             
         }
 
+        private void DataChangedUpload(KeyValuePair<string, object>[] keyValues)
+        {
+            
+        }
+
         private void timerEventProcessor(Object StateInfo)  
         {  
             //this.timer.Enabled = false;
             //this.Enabled = false;
-           
-            
+
+
             lock (this.lockDtu)
             {
-                
+
                 try
                 {
                     this.tcpClient = new TcpClient();
-                    this.tcpClient.Connect(dest, port);
+                    this.tcpClient.Connect(this.dest, this.port);
 
-                    this.Message = "连接到" + this.dest + ":" + this.port.ToString() + "成功"; 
+                    this.Message = "连接到" + this.dest + ":" + this.port.ToString() + "成功";
 
                     string sendString = this.buildSendString();
                     int tosend = (int)StateInfo;
@@ -143,24 +149,29 @@ namespace SysViewHyTurb.App
             //this.Enabled = true;
         }
 
-        private string buildSendString()
+        private string BuildSendString()
         {
-            string sendString;
-            sendString = "GET " + this.path + "?";
-            foreach (ItemDef itm in this.itemList)
+            var sendString = "GET " + this.path + "?";
+            foreach (var itm in this.itemList)
             {
-                if (itm.Value != string.Empty)
+                if (itm.VarName == "##Reserved")
                 {
                     sendString += itm.Code + "=" + itm.Value;
                 }
                 else
                 {
-                    string formatString = "##0";
-                    if(itm.Decimal >  0)
+                    var objValue = this.repo.ReadValue(itm.VarName);
+                    if (objValue != null)
                     {
-                        formatString += "." + new string('0', itm.Decimal);
+                        var dblValue = (double)objValue;
+                        var formatString = "##0";
+                        if (itm.Decimal > 0)
+                        {
+                            formatString += "." + new string('0', itm.Decimal);
+                        }
+                        sendString += itm.Code + "=" + dblValue.ToString(formatString);
                     }
-                    sendString += itm.Code + "=" + this.repo.InputRegisters[itm.VarID].ToString(formatString);
+                   
                 }
                 sendString += "&";
                 //MessageBox.Show(sendString);
@@ -209,20 +220,37 @@ namespace SysViewHyTurb.App
             }
         }
 
-        public TcpHttpCient(string dest, int port, string path, int interval,DataRepo repo)
+        public HttpUploadApp(XElement httpClientElement, DataRepo repo)
         {
-            this.dest = dest;
-            this.port = port;
-            this.path = path;
-            this.interval = interval;
+            this.dest = httpClientElement.Attribute("dest").Value;
+            this.port = int.Parse(httpClientElement.Attribute("dest").Value);
+            this.path = httpClientElement.Attribute("path").Value;
+            this.interval = int.Parse(httpClientElement.Attribute("interval").Value);
             this.repo = repo;
-            this.timer = new System.Threading.Timer(this.timerEventProcessor, 1, Timeout.Infinite, this.interval * 1000);
-            this.checkTimer = new System.Threading.Timer(this.timerEventProcessor, 0, Timeout.Infinite, 60000);
-            //this.delayDialup = new System.Threading.Timer(this.Dialup, 0, 3000, Timeout.Infinite);
+            this.repo.ValueChanged += this.DataChangedUpload;
 
+            this.checkTimer = new Timer(this.timerEventProcessor, 0, Timeout.Infinite, this.interval * 1000);
+
+            foreach (var itemElement in httpClientElement.Elements("Item"))
+            {
+                var varItem = new VarItem();
+                if (itemElement.Attribute("value") != null)
+                {
+                    varItem.Value = itemElement.Attribute("value").Value;
+                    varItem.VarName = "##Reserved";
+
+                }
+                else
+                {
+                    varItem.Value = string.Empty;
+                    varItem.VarName = itemElement.Attribute("name").Value;
+                    varItem.Decimal = ushort.Parse(itemElement.Attribute("decimal").Value);
+                }
+                this.itemList.Add(varItem);
+            }  
         }
 
-        ~TcpHttpCient()
+        ~HttpUploadApp()
         {
             try
             {
@@ -233,27 +261,12 @@ namespace SysViewHyTurb.App
             }
         }
 
-        void OnDisconnectedEvent()
-        {
-            this.connected = false;
-            this.Message = "拨号网络已断开";
-        }
-
-        void OnConnectedEvent()
-        {
-            this.connected = true;
-            this.Message = "拨号网络已连接";
-        }
-
-        public void AddItem(ItemDef item)
-        {
-            this.itemList.Add(item);
-        }
-
         public void SendData(string sendString)
         {
             var result = new StringBuilder();
             var singleByteBuffer = new byte[1];
+
+
             //MessageBox.Show(sendString);
             try
             {              

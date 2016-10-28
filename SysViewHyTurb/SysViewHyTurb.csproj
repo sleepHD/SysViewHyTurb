@@ -57,9 +57,11 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AppDriverContainer.cs" />
-    <Compile Include="app\TcpHttpCient.cs" />
-    <Compile Include="DataRepo.cs" />
+    <Compile Include="app\HttpUpload\HttpUploadApp.cs" />
+    <Compile Include="app\HttpUpload\VarItem.cs" />
+    <Compile Include="data\DataRepo.cs" />
+    <Compile Include="data\ProcessVariable.cs" />
+    <Compile Include="data\RegisterVariable.cs" />
     <Compile Include="driver\data\DiscreteCollection.cs" />
     <Compile Include="driver\data\IDataCollection.cs" />
     <Compile Include="driver\data\RegisterCollection.cs" />
@@ -78,7 +80,9 @@
     <Compile Include="driver\message\ReadHoldingInputRegistersResponse.cs" />
     <Compile Include="driver\message\SlaveExceptionResponse.cs" />
     <Compile Include="driver\Modbus.cs" />
-    <Compile Include="driver\ModbusPoller.cs" />
+    <Compile Include="driver\ModbusDriver.cs" />
+    <Compile Include="driver\ModbusRegGroup.cs" />
+    <Compile Include="driver\ModbusSlave.cs" />
     <Compile Include="driver\utility\NetworkUtility.cs" />
     <Compile Include="MainForm.cs">
       <SubType>Form</SubType>
@@ -119,7 +123,9 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="eye.ico" />
-    <Content Include="SysViewCp.xml" />
+    <Content Include="SysView.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
