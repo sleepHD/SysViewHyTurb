@@ -6,14 +6,17 @@ namespace SysViewHyTurb.data
 {
     using System.Threading;
     using System.Xml.Linq;
-
+    using app.TcpHttpClient;
     using SysViewHyTurb.driver;
+    using app.WebView;
 
     public class DataRepo
     {
         public delegate void ValueChangedHandler(KeyValuePair<string, object>[] keyValues);
 
         public event ValueChangedHandler ValueChanged;
+
+        public int AppNum { get; set; }
 
         public object ReadValue(string name)
         {
@@ -103,14 +106,16 @@ namespace SysViewHyTurb.data
             }
         }
 
-        public DataRepo(XElement channelsElement)
+        public DataRepo(XDocument doc)
         {
             this.timers = new List<Timer>();
+
+            var channelsElement = doc.Element("Configuration").Elements("Channels");
             foreach (var channelElement in channelsElement.Elements("Channel"))
             {
                 var channel = new ModbusDriver(channelElement);
                 this.channels.Add(channel);
-                this.timers.Add(new Timer(this.TimerCallBack, this.channels.IndexOf(channel), Timeout.Infinite, 1000));
+                this.timers.Add(new Timer(this.PollChannel, this.channels.IndexOf(channel), Timeout.Infinite, 1000));
 
                 foreach (var deviceElement in channelElement.Elements("Device"))
                 {
@@ -121,9 +126,18 @@ namespace SysViewHyTurb.data
                     }
                 }
             }
+
+            var httpUploadElement = doc.Element("Configuration").Element("HttpUploadApp");
+            var httpUploadApp = new HttpUploadApp(httpUploadElement, this);
+
+
+            var webViewElement = doc.Element("Configuration").Element("WebViewApp");
+            var webViewApp = new WebViewApp(httpUploadElement, this);
+
+            this.AppNum = 1;
         }
 
-        private void TimerCallBack(Object stateInfo)
+        private void PollChannel(Object stateInfo)
         {
             var index = (int)stateInfo;
             this.timers[index].Change(Timeout.Infinite, 1000);

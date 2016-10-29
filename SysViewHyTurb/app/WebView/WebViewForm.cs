@@ -18,28 +18,9 @@ namespace SysViewHyTurb
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public partial class MainForm : Form
     {
-        private AppDriverContainer container;
-
-        /// <summary>
-        /// Gets the config file path.
-        /// </summary>
-        /// <value>
-        /// The config file path.
-        /// </value>
-        public static string ConfigFilePath
+        public void Navigate(string url)
         {
-            get
-            {
-                var assemblyPath = Path.GetDirectoryName(typeof(Program).GetTypeInfo().Assembly.Location);
-
-#if DEBUG
-                // This lets you edit the files without restarting the server.
-                return Directory.GetParent(assemblyPath).Parent.FullName + "\\SysViewCp.xml";
-#else
-                // This is when you have deployed the server.
-                return Path.Combine(assemblyPath, "html");
-#endif
-            }
+            this.MainwebBrowser.Navigate(url);
         }
 
         public MainForm()
@@ -50,18 +31,6 @@ namespace SysViewHyTurb
 
         private void MainForm_Load(object sender, EventArgs e)
         {
-            try
-            {
-                this.container = new AppDriverContainer(ConfigFilePath);
-               
-            }
-            catch (Exception err)
-            {
-                MessageBox.Show("程序初始化失败，请检查配置文件SysView.xml格式  " + err.Message);
-                Application.Exit();
-            }
-
-
             this.FormBorderStyle = FormBorderStyle.None;
             this.WindowState = FormWindowState.Maximized;
             this.TopMost = true;
@@ -71,16 +40,10 @@ namespace SysViewHyTurb
             }
             this.MainwebBrowser.AllowWebBrowserDrop = false;
             //this.MainwebBrowser.IsWebBrowserContextMenuEnabled = false;
-            this.MainwebBrowser.Navigate(Program.Url);
             this.MainwebBrowser.ObjectForScripting = this;
             
 
 
-        }
-
-        private void MainForm_FormClosed(object sender, FormClosedEventArgs e)
-        {
-            Program.EmbedWebServer.Dispose();
         }
 
         private void MainwebBrowser_PreviewKeyDown(object sender, PreviewKeyDownEventArgs e)
