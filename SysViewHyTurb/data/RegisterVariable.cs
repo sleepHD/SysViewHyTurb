@@ -62,12 +62,12 @@ namespace SysViewHyTurb.data
 
         public RegisterVariable(XElement varElement)
         {
-            Name = varElement.Attribute("Name").Value;
-            RegName = varElement.Attribute("RegName").Value;
-            this.RegValueType = (TypeCode)Enum.Parse(typeof(TypeCode), varElement.Attribute("RegValueType").Value);
+            Name = varElement.Attribute("name").Value;
+            RegName = varElement.Attribute("regName").Value;
+            this.RegValueType = (TypeCode)Enum.Parse(typeof(TypeCode), varElement.Attribute("regValueType").Value);
             //Length = int.Parse(varElement.Attribute("Length").Value);
-            UpdateRate = int.Parse(varElement.Attribute("UpdateRate").Value);
-            Swap = int.Parse(varElement.Attribute("Swap").Value);
+            UpdateRate = int.Parse(varElement.Attribute("updateRate").Value);
+            //Swap = int.Parse(varElement.Attribute("Swap").Value);
         }
     }
 }

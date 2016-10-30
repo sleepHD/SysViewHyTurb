@@ -192,7 +192,7 @@ namespace SysViewHyTurb.app.TcpHttpClient
         public HttpUploadApp(XElement httpClientElement, DataRepo repo)
         {
             this.dest = httpClientElement.Attribute("dest").Value;
-            this.port = int.Parse(httpClientElement.Attribute("dest").Value);
+            this.port = int.Parse(httpClientElement.Attribute("port").Value);
             this.path = httpClientElement.Attribute("path").Value;
             this.interval = int.Parse(httpClientElement.Attribute("interval").Value);
             this.repo = repo;
@@ -207,7 +207,7 @@ namespace SysViewHyTurb.app.TcpHttpClient
                 {
                     varItem.Value = itemElement.Attribute("value").Value;
                     varItem.VarName = "##Reserved";
-                    varItem.Code = itemElement.Attribute("Code").Value;
+                    varItem.Code = itemElement.Attribute("code").Value;
 
                 }
                 else
@@ -215,7 +215,7 @@ namespace SysViewHyTurb.app.TcpHttpClient
                     varItem.Value = string.Empty;
                     varItem.Decimal = ushort.Parse(itemElement.Attribute("decimal").Value);
                     varItem.VarName = itemElement.Attribute("name").Value;            
-                    varItem.Code = itemElement.Attribute("Code").Value;
+                    varItem.Code = itemElement.Attribute("code").Value;
                 }
                 this.itemList.Add(varItem);
             }  

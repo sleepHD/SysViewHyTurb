@@ -57,14 +57,14 @@ namespace SysViewHyTurb.data
         /// <param name="processVarElement">process variable configuration XElement</param>
         public ProcessVariable(XElement processVarElement)
         {
-            this.name = processVarElement.Attribute("Name").Value;
-            this.valueType = (TypeCode)Enum.Parse(typeof(TypeCode), processVarElement.Attribute("ValueType").Value);
-            this.value = System.Convert.ChangeType(processVarElement.Attribute("InitValue").Value, this.valueType);
-            this.convert = bool.Parse(processVarElement.Attribute("Convert").Value);
-            this.maxRawValue = double.Parse(processVarElement.Attribute("MaxRawValue").Value);
-            this.minRawValue = double.Parse(processVarElement.Attribute("MinRawValue").Value);
-            this.maxValue = double.Parse(processVarElement.Attribute("MaxValue").Value);
-            this.minValue = double.Parse(processVarElement.Attribute("MinValue").Value);
+            this.name = processVarElement.Attribute("name").Value;
+            this.valueType = (TypeCode)Enum.Parse(typeof(TypeCode), processVarElement.Attribute("valueType").Value);
+            this.value = System.Convert.ChangeType(processVarElement.Attribute("initValue").Value, this.valueType);
+            this.convert = bool.Parse(processVarElement.Attribute("convert").Value);
+            this.maxRawValue = double.Parse(processVarElement.Attribute("maxRawValue").Value);
+            this.minRawValue = double.Parse(processVarElement.Attribute("minRawValue").Value);
+            this.maxValue = double.Parse(processVarElement.Attribute("maxValue").Value);
+            this.minValue = double.Parse(processVarElement.Attribute("minValue").Value);
         }
 
         /// <summary>
