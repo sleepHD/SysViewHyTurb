@@ -44,7 +44,11 @@ namespace SysViewHyTurb
         {
             var doc = XDocument.Load(ConfigFilePath);
             var repo = new DataRepo(doc);
-            while (repo.AppNum > 0) ;
+            while (repo.AppNum > 0)
+            {
+                
+            }
+            //Application.Exit();
         }
     }
 }

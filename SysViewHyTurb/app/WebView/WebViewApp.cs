@@ -81,7 +81,10 @@ namespace SysViewHyTurb.app.WebView
 
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new MainForm());
+            var frm = new MainForm();
+            frm.Navigate(this.url);
+            this.repo.AppNum = 1;
+            Application.Run(frm);
             this.repo.AppNum = 0;
         }
     }

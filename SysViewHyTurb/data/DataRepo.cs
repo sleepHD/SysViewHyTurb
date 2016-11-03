@@ -133,8 +133,7 @@ namespace SysViewHyTurb.data
 
             var webViewElement = doc.Element("Configuration").Element("WebViewApp");
             var webViewApp = new WebViewApp(webViewElement, this);
-
-            this.AppNum = 1;
+            
         }
 
         private void PollChannel(Object stateInfo)
