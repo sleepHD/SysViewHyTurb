@@ -196,7 +196,7 @@ namespace SysViewHyTurb.app.TcpHttpClient
             this.path = httpClientElement.Attribute("path").Value;
             this.interval = int.Parse(httpClientElement.Attribute("interval").Value);
             this.repo = repo;
-            this.repo.ValueChanged += this.DataChangedUpload;
+            //this.repo.ValueChanged += this.DataChangedUpload;
 
             this.timer = new Timer(this.timerEventProcessor, 0, Timeout.Infinite, this.interval * 1000);
 

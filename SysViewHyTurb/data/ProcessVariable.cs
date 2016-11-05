@@ -107,7 +107,7 @@ namespace SysViewHyTurb.data
 
             set
             {
-                this.value = value;
+                this.rawValue = value;
                 this.value = this.CalcValue();
             }
         }
@@ -222,7 +222,7 @@ namespace SysViewHyTurb.data
             object result = this.rawValue;
             if (this.Convert)
             {
-                result = (((double)this.rawValue - this.MinRawValue) * (this.MaxValue - this.MinValue) / (this.MaxRawValue - this.MinRawValue))
+                result = (((float)this.rawValue - this.MinRawValue) * (this.MaxValue - this.MinValue) / (this.MaxRawValue - this.MinRawValue))
                      + this.MinValue;
             }
 

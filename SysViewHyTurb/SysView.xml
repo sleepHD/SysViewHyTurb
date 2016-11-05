@@ -17,18 +17,17 @@
   <Channels>
     <Channel port = "COM9" setting = "9600,8,1,0">
       <Device Address = "1">
-        <PV name = "tmp0"  valueType = "14" initValue = "0" maxRawValue = "20" minRawValue = "4" maxValue = "150" minValue = "-50" convert = "true" regName = "40033" regValueType = "13" updateRate = "2"/>
-        <PV name = "tmp1"  valueType = "14" initValue = "0" maxRawValue = "20" minRawValue = "4" maxValue = "0.2" minValue = "0" convert = "true" regName = "40035" regValueType = "13" updateRate = "2"/>
-        <PV name = "pre1"  valueType = "14" initValue = "0" maxRawValue = "20" minRawValue = "4" maxValue = "0.15" minValue = "0" convert = "true" regName = "40037" regValueType = "13" updateRate = "2"/>
-        <PV name = "rot1"  valueType = "14" initValue = "0" maxRawValue = "20" minRawValue = "4" maxValue = "150" minValue = "-50" convert = "true" regName = "40039" regValueType = "13" updateRate = "2"/>
-        <PV name = "tmp2"  valueType = "14" initValue = "0" maxRawValue = "20" minRawValue = "4" maxValue = "0.2" minValue = "0" convert = "true" regName = "40041" regValueType = "13" updateRate = "2"/>
-        <PV name = "pre2"  valueType = "14" initValue = "0" maxRawValue = "20" minRawValue = "4" maxValue = "0.15" minValue = "0" convert = "true" regName = "40043" regValueType = "13" updateRate = "2"/>
-        <PV name = "rot2"  valueType = "14" initValue = "0" maxRawValue = "20" minRawValue = "4" maxValue = "150" minValue = "-50" convert = "true" regName = "40045" regValueType = "13" updateRate = "2"/>
-        <PV name = "tmp3"  valueType = "14" initValue = "0" maxRawValue = "20" minRawValue = "4" maxValue = "0.2" minValue = "0" convert = "true" regName = "40047" regValueType = "13" updateRate = "2"/>
-        <PV name = "pre3"  valueType = "14" initValue = "0" maxRawValue = "20" minRawValue = "4" maxValue = "0.15" minValue = "0" convert = "true" regName = "40049" regValueType = "13" updateRate = "2"/>
-        <PV name = "rot3"  valueType = "14" initValue = "0" maxRawValue = "20" minRawValue = "4" maxValue = "150" minValue = "-50" convert = "true" regName = "40051" regValueType = "13" updateRate = "2"/>
+        <PV name = "tmp0"  valueType = "14" initValue = "0" maxRawValue = "20" minRawValue = "4" maxValue = "150" minValue = "-50" convert = "false" regName = "40033" regValueType = "13" updateRate = "2"/>
+        <PV name = "tmp1"  valueType = "14" initValue = "0" maxRawValue = "20" minRawValue = "4" maxValue = "0.2" minValue = "0" convert = "false" regName = "40035" regValueType = "13" updateRate = "2"/>
+        <PV name = "pre1"  valueType = "14" initValue = "0" maxRawValue = "20" minRawValue = "4" maxValue = "0.15" minValue = "0" convert = "false" regName = "40037" regValueType = "13" updateRate = "2"/>
+        <PV name = "rot1"  valueType = "14" initValue = "0" maxRawValue = "20" minRawValue = "4" maxValue = "150" minValue = "-50" convert = "false" regName = "40039" regValueType = "13" updateRate = "2"/>
+        <PV name = "tmp2"  valueType = "14" initValue = "0" maxRawValue = "20" minRawValue = "4" maxValue = "0.2" minValue = "0" convert = "false" regName = "40041" regValueType = "13" updateRate = "2"/>
+        <PV name = "pre2"  valueType = "14" initValue = "0" maxRawValue = "20" minRawValue = "4" maxValue = "0.15" minValue = "0" convert = "false" regName = "40043" regValueType = "13" updateRate = "2"/>
+        <PV name = "rot2"  valueType = "14" initValue = "0" maxRawValue = "20" minRawValue = "4" maxValue = "150" minValue = "-50" convert = "false" regName = "40045" regValueType = "13" updateRate = "2"/>
+        <PV name = "tmp3"  valueType = "14" initValue = "0" maxRawValue = "20" minRawValue = "4" maxValue = "0.2" minValue = "0" convert = "false" regName = "40047" regValueType = "13" updateRate = "2"/>
+        <PV name = "pre3"  valueType = "14" initValue = "0" maxRawValue = "20" minRawValue = "4" maxValue = "0.15" minValue = "0" convert = "false" regName = "40049" regValueType = "13" updateRate = "2"/>
+        <PV name = "rot3"  valueType = "14" initValue = "0" maxRawValue = "20" minRawValue = "4" maxValue = "150" minValue = "-50" convert = "false" regName = "40051" regValueType = "13" updateRate = "2"/>
       </Device>
     </Channel>
   </Channels>
-  
 </Configuration>

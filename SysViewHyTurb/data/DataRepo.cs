@@ -115,7 +115,7 @@ namespace SysViewHyTurb.data
             {
                 var channel = new ModbusDriver(channelElement);
                 this.channels.Add(channel);
-                this.timers.Add(new Timer(this.PollChannel, this.channels.IndexOf(channel), Timeout.Infinite, 1000));
+                this.timers.Add(new Timer(this.PollChannel, this.channels.IndexOf(channel), 1000, 1000));
 
                 foreach (var deviceElement in channelElement.Elements("Device"))
                 {
@@ -152,7 +152,7 @@ namespace SysViewHyTurb.data
                         foreach (var regVar in grp.RegVars)
                         {
                             var variable = this.variables[regVar.Name];
-                            variable.RawValue = regVar;
+                            variable.RawValue = regVar.Value;
                             keyValues.Add(new KeyValuePair<string, object>(variable.Name, variable.Value));
                         }
                     }

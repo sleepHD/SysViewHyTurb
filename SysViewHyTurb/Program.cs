@@ -5,11 +5,9 @@ namespace SysViewHyTurb
     using System;
     using System.IO;
     using System.Reflection;
-    using System.Windows.Forms;
     using System.Xml.Linq;
     using data;
-    using Unosquare.Labs.EmbedIO;
-    using Unosquare.Labs.EmbedIO.Modules;
+    using System.Threading;
 
     static class Program
     {
@@ -46,7 +44,7 @@ namespace SysViewHyTurb
             var repo = new DataRepo(doc);
             while (repo.AppNum > 0)
             {
-                
+                Thread.Sleep(1000);
             }
             //Application.Exit();
         }

@@ -59,7 +59,8 @@ namespace SysViewHyTurb.driver
             if (ConvertRegister(reg) > 0)
             {
                 this.RegStart = reg.RegNo;
-                
+                this.RegType = reg.RegType;
+                this.regNum = 1;
                 this.AddReg(reg);
             }
         }
@@ -99,7 +100,7 @@ namespace SysViewHyTurb.driver
         public int ConvertRegister(RegisterVariable reg)
         {
             var regAddr = ushort.Parse(reg.RegName);
-            reg.RegNo = (ushort)(regAddr % 10000);
+            reg.RegNo = (ushort)regAddr;
             reg.RegType = (ushort)(regAddr / 10000);
             return 1;
         }

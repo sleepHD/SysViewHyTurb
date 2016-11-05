@@ -21,6 +21,16 @@ namespace SysViewHyTurb.app.WebView
 
         private readonly string htmlRootPath;
 
+        private void DataChanged(KeyValuePair<string, object>[] keyValues)
+        {
+            var message = new StringBuilder();
+            foreach(var keyValue in keyValues)
+            {
+                message.Append(keyValue.Key + " : " + keyValue.Value + Environment.NewLine);
+            }
+            MessageBox.Show(message.ToString(), "data");
+        }
+
         /// <summary>
         /// Gets the HTML root path.
         /// </summary>
@@ -78,7 +88,7 @@ namespace SysViewHyTurb.app.WebView
             // disposing of the object until a key is pressed.
             //server.Run();
             embedWebServer.RunAsync();
-
+            this.repo.ValueChanged += this.DataChanged;
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             var frm = new MainForm();

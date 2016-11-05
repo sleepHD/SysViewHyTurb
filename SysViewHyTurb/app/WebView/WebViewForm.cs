@@ -32,8 +32,8 @@ namespace SysViewHyTurb
         private void MainForm_Load(object sender, EventArgs e)
         {
             this.FormBorderStyle = FormBorderStyle.None;
-            this.WindowState = FormWindowState.Maximized;
-            this.TopMost = true;
+            //this.WindowState = FormWindowState.Maximized;
+            //this.TopMost = true;
             if (!WBEmulator.IsBrowserEmulationSet())
             {
                 WBEmulator.SetBrowserEmulationVersion();

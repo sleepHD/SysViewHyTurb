@@ -37,7 +37,7 @@ namespace SysViewHyTurb.driver
 
         public void ProcessRegisterGroup(ModbusSlave slave, ModbusRegGroup grp)
         {
-            if (grp.CommStatus == 0 && grp.WaitTimes > 0)
+            if (grp.WaitTimes > 0)
             {
                 grp.WaitTimes--;
             }
