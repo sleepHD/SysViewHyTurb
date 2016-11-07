@@ -10,12 +10,19 @@ using System.Windows.Forms;
 
 namespace SysViewHyTurb
 {
+    using System.IO;
+    using System.Reflection;
     using System.Security.Permissions;
 
     [PermissionSet(SecurityAction.Demand, Name = "FullTrust")]
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public partial class MainForm : Form
     {
+        public void Navigate(string url)
+        {
+            this.MainwebBrowser.Navigate(url);
+        }
+
         public MainForm()
         {
             InitializeComponent();
@@ -25,23 +32,18 @@ namespace SysViewHyTurb
         private void MainForm_Load(object sender, EventArgs e)
         {
             this.FormBorderStyle = FormBorderStyle.None;
-            this.WindowState = FormWindowState.Maximized;
-            this.TopMost = true;
+            //this.WindowState = FormWindowState.Maximized;
+            //this.TopMost = true;
             if (!WBEmulator.IsBrowserEmulationSet())
             {
                 WBEmulator.SetBrowserEmulationVersion();
             }
             this.MainwebBrowser.AllowWebBrowserDrop = false;
             //this.MainwebBrowser.IsWebBrowserContextMenuEnabled = false;
-            this.MainwebBrowser.Navigate(Program.Url);
             this.MainwebBrowser.ObjectForScripting = this;
             
 
-        }
 
-        private void MainForm_FormClosed(object sender, FormClosedEventArgs e)
-        {
-            Program.EmbedWebServer.Dispose();
         }
 
         private void MainwebBrowser_PreviewKeyDown(object sender, PreviewKeyDownEventArgs e)

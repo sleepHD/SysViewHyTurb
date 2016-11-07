@@ -38,6 +38,10 @@
     <Reference Include="AustinHarris.JsonRpc">
       <HintPath>..\packages\AustinHarris.JsonRpc.1.0.4.46\lib\net40\AustinHarris.JsonRpc.dll</HintPath>
     </Reference>
+    <Reference Include="log4net, Version=1.2.15.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">
+      <HintPath>..\packages\log4net.2.0.5\lib\net45-full\log4net.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Newtonsoft.Json, Version=9.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Newtonsoft.Json.9.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
@@ -57,19 +61,47 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="MainForm.cs">
+    <Compile Include="app\HttpUpload\HttpUploadApp.cs" />
+    <Compile Include="app\HttpUpload\VarItem.cs" />
+    <Compile Include="app\WebView\WebViewApp.cs" />
+    <Compile Include="data\DataRepo.cs" />
+    <Compile Include="data\ProcessVariable.cs" />
+    <Compile Include="data\RegisterVariable.cs" />
+    <Compile Include="driver\data\DiscreteCollection.cs" />
+    <Compile Include="driver\data\IDataCollection.cs" />
+    <Compile Include="driver\data\RegisterCollection.cs" />
+    <Compile Include="driver\device\ModbusMaster.cs" />
+    <Compile Include="driver\io\IStreamResource.cs" />
+    <Compile Include="driver\io\ModbusRtuTransport.cs" />
+    <Compile Include="driver\io\ModbusSerialTransport.cs" />
+    <Compile Include="driver\io\ModbusTransport.cs" />
+    <Compile Include="driver\io\SerialPortAdapter.cs" />
+    <Compile Include="driver\io\Transport.cs" />
+    <Compile Include="driver\message\Message.cs" />
+    <Compile Include="driver\message\ModbusMessage.cs" />
+    <Compile Include="driver\message\ReadCoilsInputsRequest.cs" />
+    <Compile Include="driver\message\ReadCoilsInputsResponse.cs" />
+    <Compile Include="driver\message\ReadHoldingInputRegistersRequest.cs" />
+    <Compile Include="driver\message\ReadHoldingInputRegistersResponse.cs" />
+    <Compile Include="driver\message\SlaveExceptionResponse.cs" />
+    <Compile Include="driver\Modbus.cs" />
+    <Compile Include="driver\ModbusDriver.cs" />
+    <Compile Include="driver\ModbusRegGroup.cs" />
+    <Compile Include="driver\ModbusSlave.cs" />
+    <Compile Include="driver\utility\NetworkUtility.cs" />
+    <Compile Include="app\WebView\WebViewForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="MainForm.Designer.cs">
-      <DependentUpon>MainForm.cs</DependentUpon>
+    <Compile Include="app\WebView\WebViewForm.Designer.cs">
+      <DependentUpon>WebViewForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="ScadaService.cs" />
-    <Compile Include="WBEmulator.cs" />
-    <Compile Include="WebSocketsScadaServer.cs" />
-    <EmbeddedResource Include="MainForm.resx">
-      <DependentUpon>MainForm.cs</DependentUpon>
+    <Compile Include="app\WebView\EmbedWebServer\ScadaService.cs" />
+    <Compile Include="app\WebView\WBEmulator.cs" />
+    <Compile Include="app\WebView\EmbedWebServer\WebSocketsScadaServer.cs" />
+    <EmbeddedResource Include="app\WebView\WebViewForm.resx">
+      <DependentUpon>WebViewForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -96,7 +128,11 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="eye.ico" />
+    <Content Include="SysView.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
